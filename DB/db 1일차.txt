@@ -1,0 +1,289 @@
+sqlplus 'system' 계정 연결
+
+-- scott 계정 생성
+create user scott identified by tiger;
+
+-- scott.sql 파일 실행
+@C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\scott.sql
+
+-- 연결 계정 확인 : scott 으로 나오면 됨
+show user;
+
+-- system 계정 연결
+conn system/oracle
+
+-- scott 계정 pw 변경
+alter user scott identified by tiger;
+
+-- scott 계정 연결 확인
+conn scott/tiger
+
+==============================================================
+-- scott 계정 테이블 목록 확인
+select * from tab;
+
+TNAME                                                        TABTYPE
+---------------------------------------------------------------------
+BONUS                                                        TABLE
+DEPT                                                         TABLE
+EMP                                                          TABLE
+SALGRADE
+
+==============================================================
+
+sqlplus 'system' 계정 연결
+
+-- 계정 목록 확인
+select * form all_users;
+
+-- scott 계정 생성
+create user scott identified by tiger;
+
+-- scott.sql 파일 실행
+@C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\scott.sql
+
+-- 연결 계정 확인 : scott 으로 나오면 됨
+show user;
+
+-- scott 계정 테이블 목록 확인
+select * from tab;
+
+TNAME                                                        TABTYPE
+---------------------------------------------------------------------
+BONUS                                                        TABLE
+DEPT                                                         TABLE
+EMP                                                          TABLE
+SALGRADE     
+
+-- system 계정 연결
+conn system/oracle
+
+-- scott 계정 pw 변경
+alter user scott identified by tiger;
+
+-- scott 계정 연결 확인
+conn scott/tiger
+
+-- scott 계정 테이블 목록 확인
+select * from tab;
+
+TNAME                                                        TABTYPE
+---------------------------------------------------------------------
+BONUS                                                        TABLE
+DEPT                                                         TABLE
+EMP                                                          TABLE
+SALGRADE                                                     TABLE
+
+
+
+==============================================================
+
+< DB.txt >
+
+# 데이터 베이스
+- 지속적으로 유지 관리하는 데이터 집합입니다
+
+# 데이터베이스 관리 시스템 ( DataBase Management System )
+- 데이터를 편리하게 저장하고 효율적으로 관리하고 검색할 수 있는 환경을 제공해주는 시스템 소프트웨어 입니다
+
+
+# 관계형 데이터베이스 관리 시스템 ( RDBMS : Relational Database Management System )
+- 오라클, MYSql .....
+- 데이터베이스 정보를 테이블 형태로 저장합니다
+- 테이블은 2차원 형태의 표처럼 볼수 있도록 로우(row : 행)와 칼럼(Column : 열)으로 구성합니다
+
+
+# SQL ( Structured Query Language )
+- 데이터베이스에 저장된 데이터를 조회, 입력, 삭제 하는 등의 조작이나,
+  테이블을  비롯한 다양한 객체를 생성하는 및 제어하는 역할을 하는 데이터베이스 언어 입니다
+
+
+# SQL 종류
+- DQL : Data Query Language ( 데이터 질의어 )
+  > SELECT - 테이블에 저장된 데이터를 조회
+  
+- DML : Data Manipulation Language ( 데이터 조작어 )
+  > INSERT - 데이터 추가
+    UPDATE - 데이터 변경
+    DELETE - 데이터 삭제
+
+- DDL : Data Definition Language ( 데이터 정의어 ), 객체 생성 및 변경
+  > CREATE - 새로운 테이블 생성
+    ALTER  - 기존 테이블 변경
+    DROP   - 기존 테이블 삭제
+    RENAME - 기존 테이블 이름 변경
+    TRUNCATE - 데이터 삭제
+
+- TCL : Transaction Control Language ( 트랜잭션 처리 )
+  > COMMIT - 트랜잭션의 정상적인 종료 처리
+    ROLLBACK - 트랜잭션 취소
+    SAVEPOINT - 트랜잭션내에 임시 저장지점 설정
+
+- DCL : Data Control Language ( 데이터 제어어 )
+  > GRANT - 데이터베이스에 대한 권한 부여
+    REVOKE - 데이터베이스에 대한 권한 취소
+
+==============================================================
+
+-- 한줄 주석
+
+
+-- 실행 : Ctrl + Enter
+
+-- 전체 계정 확인
+select * from all_users;
+
+-- system 계정 : 사용자 계정관리
+
+-- system 계정 연결해서 scott 생성
+create user scott identified by tiger;
+--default tablespace users
+--temporary tablespace temp;
+
+-- 권한 부여
+grant connect, resource, dba to scott;
+
+-- scott 연결
+conn scott/tiger
+
+conn system/oracle
+
+-- 계정 삭제
+-- drop user 계정명;
+drop user scott;
+
+drop user scott cascade;
+
+-- sql 파일 실행
+-- sqlplus 에서 system 계정 연결
+@C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\scott.sql
+
+show user;
+
+-- 계정 잠금(lock) 해제
+-- ALTER USER 계정명 ACCOUNT UNLOCK; 
+ALTER USER scott ACCOUNT UNLOCK;
+
+conn scott/tiger
+
+
+-- SYS, SYSTEM 의 비밀번호 변경
+-- sqlplus
+-- 사용자명 : sys as sysdba
+-- PW : Enter
+-- alter user system identified by 새암호
+
+
+-- 사용자 계정 비밀번호 변경
+-- system 계정 연결
+-- alter user 사용자계정명 identified by 새암호
+
+
+==============================================================
+
+Rem Copyright (c) 1990 by Oracle Corporation
+Rem NAME
+REM    UTLSAMPL.SQL
+Rem  FUNCTION
+Rem  NOTES
+Rem  MODIFIED
+Rem	gdudey	   06/28/95 -  Modified for desktop seed database
+Rem	glumpkin   10/21/92 -  Renamed from SQLBLD.SQL
+Rem	blinden   07/27/92 -  Added primary and foreign keys to EMP and DEPT
+Rem	rlim	   04/29/91 -	      change char to varchar2
+Rem	mmoore	   04/08/91 -	      use unlimited tablespace priv
+Rem	pritto	   04/04/91 -	      change SYSDATE to 13-JUL-87
+Rem   Mendels	 12/07/90 - bug 30123;add to_date calls so language independent
+Rem
+rem
+rem $Header: utlsampl.sql 7020100.1 94/09/23 22:14:24 cli Generic<base> $ sqlbld.sql
+rem
+SET TERMOUT OFF
+SET ECHO OFF
+
+rem CONGDON    Invoked in RDBMS at build time.	 29-DEC-1988
+rem OATES:     Created: 16-Feb-83
+
+GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO SCOTT IDENTIFIED BY TIGER;
+ALTER USER SCOTT DEFAULT TABLESPACE USERS;
+ALTER USER SCOTT TEMPORARY TABLESPACE TEMP;
+CONNECT SCOTT/TIGER
+DROP TABLE DEPT;
+CREATE TABLE DEPT
+       (DEPTNO NUMBER(2) CONSTRAINT PK_DEPT PRIMARY KEY,
+	DNAME VARCHAR2(14) ,
+	LOC VARCHAR2(13) ) ;
+DROP TABLE EMP;
+CREATE TABLE EMP
+       (EMPNO NUMBER(4) CONSTRAINT PK_EMP PRIMARY KEY,
+	ENAME VARCHAR2(10),
+	JOB VARCHAR2(9),
+	MGR NUMBER(4),
+	HIREDATE DATE,
+	SAL NUMBER(7,2),
+	COMM NUMBER(7,2),
+	DEPTNO NUMBER(2) CONSTRAINT FK_DEPTNO REFERENCES DEPT);
+INSERT INTO DEPT VALUES
+	(10,'ACCOUNTING','NEW YORK');
+INSERT INTO DEPT VALUES (20,'RESEARCH','DALLAS');
+INSERT INTO DEPT VALUES
+	(30,'SALES','CHICAGO');
+INSERT INTO DEPT VALUES
+	(40,'OPERATIONS','BOSTON');
+INSERT INTO EMP VALUES
+(7369,'SMITH','CLERK',7902,to_date('17-12-1980','dd-mm-yyyy'),800,NULL,20);
+INSERT INTO EMP VALUES
+(7499,'ALLEN','SALESMAN',7698,to_date('20-2-1981','dd-mm-yyyy'),1600,300,30);
+INSERT INTO EMP VALUES
+(7521,'WARD','SALESMAN',7698,to_date('22-2-1981','dd-mm-yyyy'),1250,500,30);
+INSERT INTO EMP VALUES
+(7566,'JONES','MANAGER',7839,to_date('2-4-1981','dd-mm-yyyy'),2975,NULL,20);
+INSERT INTO EMP VALUES
+(7654,'MARTIN','SALESMAN',7698,to_date('28-9-1981','dd-mm-yyyy'),1250,1400,30);
+INSERT INTO EMP VALUES
+(7698,'BLAKE','MANAGER',7839,to_date('1-5-1981','dd-mm-yyyy'),2850,NULL,30);
+INSERT INTO EMP VALUES
+(7782,'CLARK','MANAGER',7839,to_date('9-6-1981','dd-mm-yyyy'),2450,NULL,10);
+INSERT INTO EMP VALUES
+(7788,'SCOTT','ANALYST',7566,to_date('13-JUL-87')-85,3000,NULL,20);
+INSERT INTO EMP VALUES
+(7839,'KING','PRESIDENT',NULL,to_date('17-11-1981','dd-mm-yyyy'),5000,NULL,10);
+INSERT INTO EMP VALUES
+(7844,'TURNER','SALESMAN',7698,to_date('8-9-1981','dd-mm-yyyy'),1500,0,30);
+INSERT INTO EMP VALUES
+(7876,'ADAMS','CLERK',7788,to_date('13-JUL-87')-51,1100,NULL,20);
+INSERT INTO EMP VALUES
+(7900,'JAMES','CLERK',7698,to_date('3-12-1981','dd-mm-yyyy'),950,NULL,30);
+INSERT INTO EMP VALUES
+(7902,'FORD','ANALYST',7566,to_date('3-12-1981','dd-mm-yyyy'),3000,NULL,20);
+INSERT INTO EMP VALUES
+(7934,'MILLER','CLERK',7782,to_date('23-1-1982','dd-mm-yyyy'),1300,NULL,10);
+DROP TABLE BONUS;
+CREATE TABLE BONUS
+	(
+	ENAME VARCHAR2(10)	,
+	JOB VARCHAR2(9)  ,
+	SAL NUMBER,
+	COMM NUMBER
+	) ;
+DROP TABLE SALGRADE;
+CREATE TABLE SALGRADE
+      ( GRADE NUMBER,
+	LOSAL NUMBER,
+	HISAL NUMBER );
+INSERT INTO SALGRADE VALUES (1,700,1200);
+INSERT INTO SALGRADE VALUES (2,1201,1400);
+INSERT INTO SALGRADE VALUES (3,1401,2000);
+INSERT INTO SALGRADE VALUES (4,2001,3000);
+INSERT INTO SALGRADE VALUES (5,3001,9999);
+COMMIT;
+
+SET TERMOUT ON
+SET ECHO ON
+
+
+
+
+
+
+
