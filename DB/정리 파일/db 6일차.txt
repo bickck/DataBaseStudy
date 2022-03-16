@@ -1,0 +1,46 @@
+
+-- emp 테이블의 empno, ename, job, sal 컬럼 이름만 적용된 sam01 테이블을 생성하세요
+-- 이미 있으면 테이블 삭제후에 생성하세요
+CREATE TABLE sam01 as SELECT empno,ename,job,sal FROM emp WHERE 1=0;
+DROP TABLE sam01;
+SELECT * FROM sam01;
+
+-- sam01 테이블에 데이터 3개를 추가하세요
+-- (1000, 'APPLE', 'POLICE', 10000);
+-- (1010, 'BANANA', 'NURSE', 15000);
+-- (1020, 'ORANGE', 'DOCTOR', 25000);
+INSERT INTO sam01 VALUES(1000, 'APPLE', 'POLICE', 10000);
+INSERT INTO sam01 VALUES(1010, 'BANANA', 'NURSE', 15000);
+INSERT INTO sam01 VALUES(1020, 'ORANGE', 'DOCTOR', 25000);
+
+SELECT * FROM sam01;
+
+-- sam01 테이블에 job 은 null 인 데이터를 2개 추가하세요
+INSERT INTO sam01 VALUES(1030,'MELON','',30000);
+INSERT INTO sam01 VALUES(1040,'WATERMELON','',40000);
+
+-- sam01 테이블에 emp 테이블의 부서번호 10번의 사원 정보를 추가하세요
+INSERT INTO sam01 SELECT empno,ename,job,sal FROM emp WHERE deptno =10;
+
+-- sam01 테이블의 사원 중 급여가 5000 이상인 사원들의 급여를 3000 씩 삭감하세요
+UPDATE sam01 SET sal = sal - 3000 WHERE sal >= 5000;
+SELECT * FROM sam01;
+
+-- emp 테이블에 저장된 ename, sal, hiredate, deptno 컬럼을 사용해서 sam02 테이블을 생성하세요
+CREATE TABLE sam02 as SELECT ename,sal,hiredate,deptno FROM emp;
+SELECT * FROM sam02;
+
+-- sam02 테이블의 DALLAS 에 위치한 부서 소속의 사원들 급여를 1000 인상하세요
+SELECT * FROM dept;
+UPDATE sam02 SET sal = sal + 1000 WHERE deptno = (SELECT deptno FROM dept WHERE loc = 'DALLAS');
+SELECT * FROM sam02;
+
+-- 서브 쿼리문을 사용해서 sam02 테이블의 모든 사원의 급여와 입사일을 
+-- 이름이 KING 인 사원의 급여와 입사일로 변경하세요
+ UPDATE sam02 SET (sal,hiredate) = (SELECT sal,hiredate FROM sam02 WHERE ename ='KING');
+ SELECT * FROM sam02;
+
+-- sam01 테이블에서 직급이 정해지지 않은 사원을 삭제하세요
+SELECT * FROM sam01;
+
+-- sam02 테이블에서 RESEARCH 부서 소속 사원들만 삭제하세요
